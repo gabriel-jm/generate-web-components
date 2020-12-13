@@ -1,0 +1,60 @@
+<li class="task">
+  <span></span>
+  <div>
+    <button class="btn-blue">Editar</button>
+    <button class="btn-red">Excluir</button>
+  </div>
+</li>
+
+<style>
+  .task {
+    width: 100%;
+    list-style: none;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .task > span {
+    display: block;
+    padding: 4px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    word-wrap: normal;
+  }
+
+  .task > div {
+    width: fit-content;
+  }
+
+  .btn-blue {
+    background-color: rgb(115, 185, 226);
+    color: white;
+    border-radius: 4px;
+    border: 0;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .btn-green {
+    background-color: rgb(108, 199, 108);
+    color: white;
+    border-radius: 4px;
+    border: 0;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  .btn-red {
+    background-color: rgb(226, 122, 115);
+    color: white;
+    border-radius: 4px;
+    border: 0;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+</style>
