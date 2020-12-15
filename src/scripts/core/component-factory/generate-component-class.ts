@@ -1,29 +1,11 @@
 import isClass from '../assertions/is-class.js'
 import { ComponentConfigs } from './index.js'
-
-interface AttributeChangeDef {
-  name: string
-  oldValue: any
-  newValue: any
-}
-
-type attrChangeCallback = (attribute: AttributeChangeDef) => void
-
-type attributeChangeListenerAdder = (
-  attributeName: string,
-  callback: attrChangeCallback
-) => void
-
-interface ComponentActions {
-  init?(): void
-  remove?(): void
-  attrChange?: attrChangeCallback
-}
-
-type FunctionComponentAction = (
-  element: HTMLElement,
-  addAttributeListener: attributeChangeListenerAdder
-) => undefined | VoidFunction
+import {
+  attrChangeCallback,
+  AttributeChangeDef,
+  ComponentActions,
+  FunctionComponentAction
+} from './types'
 
 export default (
   template: HTMLTemplateElement,
@@ -31,6 +13,7 @@ export default (
   configs: ComponentConfigs
 ) => {
   const { watchedAttrs, shadowDOM = true  } = configs
+  const kAttributesShortcuts = Symbol('kAttributesShortcuts')
   
   const Component = class extends HTMLElement {
     #actions: ComponentActions | FunctionComponentAction | null = null
@@ -55,6 +38,12 @@ export default (
       return this
     }
 
+    select(query: string) {
+      return this.shadowRoot
+        ? this.shadowRoot.querySelector(query)
+        : this.querySelector(query)
+    }
+
     #addAttributeListener = (attrName: string, callback: attrChangeCallback) => {
       this.#attrCallbacks.set(attrName, callback)
     }
@@ -62,17 +51,14 @@ export default (
     init() {
       shadowDOM && this.attachShadow({ mode: 'open' })
 
-      if(watchedAttrs) {
-        watchedAttrs.forEach(attr => {
-          Object.defineProperty(this, attr, {
-            get: () => {
-              return this.getAttribute(attr)
-            },
-            set: (value) => {
-              return this.setAttribute(attr, value)
-            }
-          })
-        })
+      this[kAttributesShortcuts]()
+
+      if(shadowDOM) {
+        this.shadowRoot?.appendChild(
+          template.content.cloneNode(true)
+        )
+      } else {
+        this.innerHTML = template.innerHTML
       }
 
       if(!actionsDef) return
@@ -88,6 +74,9 @@ export default (
             value: this,
             enumerable: true
           },
+          select: {
+            value: this.select.bind(this)
+          },
           onAttributeChange: {
             value: this.#addAttributeListener
           }
@@ -96,14 +85,6 @@ export default (
     }
   
     async connectedCallback() {
-      if(shadowDOM) {
-        this.shadowRoot?.appendChild(
-          template.content.cloneNode(true)
-        )
-      } else {
-        this.innerHTML = template.innerHTML
-      }
-
       if(!this.#actions) return
 
       if(typeof this.#actions === 'object') {
@@ -144,6 +125,21 @@ export default (
       
       if(attrChangeCallback) {
         attrChangeCallback(attribute)
+      }
+    }
+
+    [kAttributesShortcuts]() {
+      if(watchedAttrs) {
+        watchedAttrs.forEach(attr => {
+          Object.defineProperty(this, attr, {
+            get: () => {
+              return this.getAttribute(attr)
+            },
+            set: (value) => {
+              return this.setAttribute(attr, value)
+            }
+          })
+        })
       }
     }
   }

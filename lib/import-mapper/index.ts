@@ -36,9 +36,9 @@ async function tsCompiling() {
     await tsc.compile({
       project: path.resolve(),
       noEmitOnError: true,
-      module: 'amd',
-      moduleResolution: 'classic',
-      outFile: 'src/scripts/script.js'
+      module: 'esnext'
+      // moduleResolution: 'classic',
+      // outFile: 'src/scripts/script.js'
     })
 
     return {
