@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node lib"
+    "start": "nodemon --exec ts-node lib",
+    "build": "tsc"
   },
   "nodemonConfig": {
     "watch": [
