@@ -1,6 +1,6 @@
-import { generateComponent } from '../core/component-factory/index.js'
-import { Component } from '../core/component-factory/types.js'
-import { html } from '../core/html/html-template.js'
+import { generateComponent } from '../../core/component-factory/index.js'
+import { Component } from '../../core/component-factory/types.js'
+import { html } from '../../core/html/html-template.js'
 
 const htmlString = html`
   <link rel="stylesheet" href="css/style.css" />

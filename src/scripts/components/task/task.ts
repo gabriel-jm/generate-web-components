@@ -1,4 +1,4 @@
-import { generateComponent } from '../core/component-factory/index.js'
+import { generateComponent } from '../../core/component-factory/index.js'
 
 function taskComponent(element: HTMLElement) {
   const { shadowRoot } = element

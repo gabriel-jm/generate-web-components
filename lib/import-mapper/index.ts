@@ -37,8 +37,6 @@ async function tsCompiling() {
       project: path.resolve(),
       noEmitOnError: true,
       module: 'esnext'
-      // moduleResolution: 'classic',
-      // outFile: 'src/scripts/script.js'
     })
 
     return {
