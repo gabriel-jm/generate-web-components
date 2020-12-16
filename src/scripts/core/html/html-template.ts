@@ -9,16 +9,21 @@ export function html(strings: TemplateStringsArray | string[], ...values: string
     return acc + str + (values[index] || "");
   }, "")
 
-  const parsedHtml = fullHtml.replace(
-    regExp,
-    (_fullResult, name, attrs) => {
-      if(!name.includes('-')) return _fullResult
+  const parsedHtml = fullHtml
+    .replace(
+      regExp,
+      (_fullResult, name, attrs) => {
+        if(!name.includes('-')) return _fullResult
 
-      const attributes = attrs.trim() ? ` ${attrs.trim()}` : ""
+        const attributes = attrs.trim() ? ` ${attrs.trim()}` : ""
 
-      return `<${name}${attributes}></${name}>`
-    }
-  )
+        return `<${name}${attributes}></${name}>`
+      }
+    )
+    .replace(
+      /<(slot)(.*?)\/>/g,
+      '<$1$2></$1>'
+    )
 
   return parsedHtml
 }
