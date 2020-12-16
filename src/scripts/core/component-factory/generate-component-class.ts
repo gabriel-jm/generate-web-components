@@ -8,12 +8,14 @@ import {
 } from './types'
 
 export default (
-  template: HTMLTemplateElement,
+  template: HTMLTemplateElement | null,
   actionsDef: Function | Object | ObjectConstructor | null,
   configs: ComponentConfigs
 ) => {
   const { watchedAttrs, shadowDOM = true  } = configs
   const kAttributesShortcuts = Symbol('kAttributesShortcuts')
+  const kInnerHTML = Symbol('kInnerHTML')
+  const kGenerateActions = Symbol('kGenerateActions')
   
   const Component = class extends HTMLElement {
     #actions: ComponentActions | FunctionComponentAction | null = null
@@ -53,35 +55,9 @@ export default (
 
       this[kAttributesShortcuts]()
 
-      if(shadowDOM) {
-        this.shadowRoot?.appendChild(
-          template.content.cloneNode(true)
-        )
-      } else {
-        this.innerHTML = template.innerHTML
-      }
+      this[kGenerateActions]()
 
-      if(!actionsDef) return
-
-      this.#actions = isClass(actionsDef)
-        ? new (actionsDef as ObjectConstructor)()
-        : actionsDef
-      ;
-
-      if(typeof this.#actions === 'object') {
-        Object.defineProperties(this.#actions, {
-          element: {
-            value: this,
-            enumerable: true
-          },
-          select: {
-            value: this.select.bind(this)
-          },
-          onAttributeChange: {
-            value: this.#addAttributeListener
-          }
-        })
-      }
+      this[kInnerHTML]()
     }
   
     async connectedCallback() {
@@ -142,6 +118,51 @@ export default (
         })
       }
     }
+
+    [kGenerateActions]() {
+      if(!actionsDef) return
+
+      this.#actions = isClass(actionsDef)
+        ? new (actionsDef as ObjectConstructor)()
+        : actionsDef
+      ;
+
+      if(typeof this.#actions === 'object') {
+        Object.defineProperties(this.#actions, {
+          element: {
+            value: this,
+            enumerable: true
+          },
+          select: {
+            value: this.select.bind(this)
+          },
+          onAttributeChange: {
+            value: this.#addAttributeListener
+          }
+        })
+      }
+    }
+
+    [kInnerHTML]() {
+      if(template) {
+        if(shadowDOM) {
+          this.shadowRoot?.appendChild(
+            template.content.cloneNode(true)
+          )
+        } else {
+          this.innerHTML = template.innerHTML
+        }
+      }
+
+      if(
+        this.#actions &&
+        typeof this.#actions === 'object' &&
+        this.#actions.render
+      ) {
+        this.root.innerHTML = this.#actions.render()
+      }
+    }
+
   }
 
   return Component

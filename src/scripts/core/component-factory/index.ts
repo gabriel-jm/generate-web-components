@@ -18,9 +18,13 @@ export async function generateComponent(
  
   if(customElements.get(tag)) return
 
-  const template = htmlString
+  const template = await (async () => {
+    if(!htmlString && !htmlPath) return null
+
+    return htmlString
     ? generateTemplate(htmlString)
     : await findHtml(htmlPath || '')
+  })()
 
   const Component = createComponent(template, actionsDefinition, configs)
   

@@ -15,6 +15,7 @@ export interface ComponentActions {
   init?(): void
   remove?(): void
   attrChange?: attrChangeCallback
+  render?(): string
 }
 
 export type FunctionComponentAction = (
