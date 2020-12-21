@@ -25,9 +25,10 @@ export type FunctionComponentAction = (
 
 export type attrChangeListener = (attrName: string, callback: attrChangeCallback) => void
 
-type ComponentAddOns = {
+interface ComponentAddOns {
   select(query: string): HTMLElement
   root: ShadowRoot
+  [key: string]: any
 }
 
 export type Component = HTMLElement & ComponentAddOns
@@ -37,4 +38,11 @@ export class ComponentClass {
   protected readonly select!: (query: string) => HTMLElement
   protected readonly root!: HTMLElement
   protected readonly onAttributeChange!: attributeChangeListenerAdder
+}
+
+export type ComponentObject = {
+  readonly element: Component
+  readonly select: (query: string) => HTMLElement
+  readonly root: HTMLElement
+  readonly onAttributeChange: attributeChangeListenerAdder
 }

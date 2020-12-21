@@ -1,13 +1,17 @@
 import { generateComponent } from '../../core/component-factory/index.js'
 import { html } from '../../core/html/html-template.js'
 
-const htmlString = html`
-  <header>
-    <h1>Todo Title</h1>
-  </header>
-`;
+const Title = {
+  render() {
+    return html`
+      <header>
+        <h1>${this.element.text || 'Default Title'}</h1>
+      </header>
+    `
+  }
+} as any
 
-generateComponent(null, {
+generateComponent(Title, {
   tag: 'app-title',
-  htmlString
+  watchedAttrs: ['text']
 })

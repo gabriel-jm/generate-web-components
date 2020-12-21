@@ -2,18 +2,6 @@ import { generateComponent } from '../core/component-factory/index.js'
 import { ComponentClass } from '../core/component-factory/types.js'
 import { html } from '../core/html/html-template.js'
 
-const htmlString = html`
-  <app-title></app-title>
-
-  <main>
-    <app-form label-name="Tarefa"></app-form>
-
-    <section>
-      <ul list></ul>
-    </section>
-  </main>
-`
-
 class AppRoot extends ComponentClass {
   init() {
     const form = this.select('app-form') as HTMLElement
@@ -29,13 +17,25 @@ class AppRoot extends ComponentClass {
       list.appendChild(taskElement)
     })
   }
+
+  render() {
+    return html`
+      <app-title text="Meu titulo" />
+    
+      <main>
+        <app-form label-name="Tarefa"></app-form>
+    
+        <section>
+          <ul list></ul>
+        </section>
+      </main>
+    `
+  }
 }
 
 generateComponent(
-  AppRoot,
-  {
+  AppRoot, {
     tag: 'app-root',
-    htmlString,
     watchedAttrs: ['align']
   }
 )
