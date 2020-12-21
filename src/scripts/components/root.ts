@@ -1,6 +1,6 @@
 import { generateComponent } from '../core/component-factory/index.js'
 import { ComponentClass } from '../core/component-factory/types.js'
-import { html } from '../core/html/html-template.js'
+import { html } from '../core/templates/index.js'
 import routes from './routes.js'
 
 class AppRoot extends ComponentClass {

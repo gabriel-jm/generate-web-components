@@ -1,5 +1,5 @@
 import { generateComponent } from '../../core/component-factory/index.js'
-import { html } from '../../core/html/html-template.js'
+import { html } from '../../core/templates/index.js'
 
 function Home () {
 

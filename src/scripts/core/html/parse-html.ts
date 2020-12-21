@@ -1,4 +1,4 @@
-import { html } from './html-template.js'
+import { html } from '../templates/index.js'
 
 async function loadHtml(path: string) {
   const response = await fetch(path, {
