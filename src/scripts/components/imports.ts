@@ -1,4 +1,2 @@
-import './form/form.js'
-import './task/task.js'
-import './title/title.js'
+import './home/app-home.js'
 import './root.js'
