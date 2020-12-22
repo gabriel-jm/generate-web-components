@@ -27,10 +27,10 @@ class AppRoot extends ComponentClass {
     return html`
       <h1>Meu App</h1>
 
-      <app-link href="/register">teste</app-link>
       <div>
         <${this.handleUrl()}/>
       </div>
+      <app-link href="/register">teste</app-link>
     `
   }
 }

@@ -51,7 +51,7 @@ function runServer(files: PathMap[]) {
     res.end()
   }
 
-  const port = 3000
+  const port = 8000
   server.listen(port, () => Logger.startServer(port))
 }
 

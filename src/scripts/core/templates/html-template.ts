@@ -1,9 +1,19 @@
+import { RawHTML } from './raw-html-template.js'
+
 const regExp = /<([a-zA-Z0-9\-]+)\s(.*)\/>/g
 
-export function html(strings: TemplateStringsArray | string[], ...values: string[]) {
+export function html(strings: TemplateStringsArray | string[], ...values: (string | RawHTML)[]) {
   values = values.map((value) => {
-    console.log(value)
-    return !value ? '' : value.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    if(value instanceof RawHTML) {
+      return value.isSafe ? value.html : ''
+    }
+
+    return !value
+      ? ''
+      : value
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/javascript:/, '')
   })
 
   const fullHtml = strings.reduce((acc, str, index) => {

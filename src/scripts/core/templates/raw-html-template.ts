@@ -8,9 +8,10 @@ export class RawHTML {
   }
 }
 
-export function raw(strings: TemplateStringsArray | string[], values: string[]) {
+export function raw(strings: TemplateStringsArray | string[], ...values: string[]) {
   const fullHtml = strings.reduce((acc, str, index) => {
-    return acc + str + (values ? values[index] : "")
+    const value = values && values[index] ? values[index] : ''
+    return acc + str + value
   }, "")
 
   const parsedHtml = fullHtml
