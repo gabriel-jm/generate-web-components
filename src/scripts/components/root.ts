@@ -27,6 +27,7 @@ class AppRoot extends ComponentClass {
     return html`
       <h1>Meu App</h1>
 
+      <app-link href="/register">teste</app-link>
       <div>
         <${this.handleUrl()}/>
       </div>
@@ -34,6 +35,4 @@ class AppRoot extends ComponentClass {
   }
 }
 
-generateComponent(
-  AppRoot, { tag: 'app-root' }
-)
+generateComponent(AppRoot, { tag: 'app-root' })

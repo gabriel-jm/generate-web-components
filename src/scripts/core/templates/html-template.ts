@@ -2,7 +2,8 @@ const regExp = /<([a-zA-Z0-9\-]+)\s(.*)\/>/g
 
 export function html(strings: TemplateStringsArray | string[], ...values: string[]) {
   values = values.map((value) => {
-    return value.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    console.log(value)
+    return !value ? '' : value.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   })
 
   const fullHtml = strings.reduce((acc, str, index) => {

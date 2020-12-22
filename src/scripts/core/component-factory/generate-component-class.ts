@@ -52,10 +52,9 @@ export default (
   
     init() {
       shadowDOM && this.attachShadow({ mode: 'open' })
+      this[kGenerateActions]()
 
       this[kAttributesShortcuts]()
-
-      this[kGenerateActions]()
 
       this[kInnerHTML]()
     }
@@ -108,13 +107,16 @@ export default (
       if(watchedAttrs) {
         watchedAttrs.forEach(attr => {
           Object.defineProperty(this, attr, {
-            get: () => {
-              return this.getAttribute(attr)
-            },
-            set: (value) => {
-              return this.setAttribute(attr, value)
-            }
+            get: () => this.getAttribute(attr),
+            set: (value) => this.setAttribute(attr, value)
           })
+          
+          if(typeof this.#actions === 'object') {
+            Object.defineProperty(this.#actions, attr, {
+              get: () => this.getAttribute(attr),
+              set: (value) => this.setAttribute(attr, value)
+            })
+          }
         })
       }
     }

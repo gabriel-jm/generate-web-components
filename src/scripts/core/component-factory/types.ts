@@ -38,6 +38,7 @@ export class ComponentClass {
   protected readonly select!: (query: string) => HTMLElement
   protected readonly root!: HTMLElement
   protected readonly onAttributeChange!: attributeChangeListenerAdder
+  [key: string]: any
 }
 
 export type ComponentObject = {
