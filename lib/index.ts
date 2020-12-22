@@ -13,7 +13,7 @@ const mimeTypes: { [key: string]: string } = {
 function runServer(files: PathMap[]) {
   const server = http.createServer(async (req, res) => {
     const urlArray = req.url?.split('/').filter(Boolean) || []
-    const fileName = !urlArray.length ? ['index.html'] : urlArray
+    const fileName = !urlArray.length || !req.url?.includes('.') ? ['index.html'] : urlArray
     const filePath = path.resolve('src', ...fileName)
 
     const [ , extension] = fileName.pop()?.split('.') || ''
