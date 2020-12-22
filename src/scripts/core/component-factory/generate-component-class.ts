@@ -81,6 +81,8 @@ export default (
       if(typeof this.#actions === 'function') {
         this.#removeCallback && this.#removeCallback(this)
       }
+
+      this.root.innerHTML = ''
     }
 
     attributeChangedCallback(attrName: string, oldValue: any, newValue: any) {

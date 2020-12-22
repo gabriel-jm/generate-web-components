@@ -8,7 +8,6 @@ async function loadHtml(path: string) {
   })
 
   const htmlString = await response.text()
-
   return htmlString
 }
 
@@ -17,11 +16,10 @@ export async function getHtml(path: string) {
     const loadedHtml = await loadHtml(path)
 
     const parsedHtml = html([loadedHtml])
-
     return parsedHtml
-  } catch(error) {
+  }
+  catch(error) {
     console.error(error)
-
     return error.message
   }
 }

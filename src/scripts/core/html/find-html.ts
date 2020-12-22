@@ -1,5 +1,5 @@
 import { generateTemplate } from './generate-template.js'
-import { getHtml } from './parse-html.js'
+import { getHtml } from './html-loader.js'
 
 interface htmlRegister {
   path: string
@@ -16,10 +16,7 @@ export async function findHtml(path: string) {
     return generateTemplate(existingHtml.html)
   }
 
-  const htmlData = await getHtml(path)
-  
-  const regex = /(?=[>|\n])\s+|\r+/g
-  const html = htmlData.replace(regex, "")
+  const html = await getHtml(path)
   htmlCache.push({ path, html })
 
   return generateTemplate(html)

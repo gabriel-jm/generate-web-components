@@ -31,10 +31,8 @@ export function html(strings: TemplateStringsArray | string[], ...values: (strin
         return `<${name}${attributes}></${name}>`
       }
     )
-    .replace(
-      /<(slot)(.*?)\/>/g,
-      '<$1$2></$1>'
-    )
+    .replace(/<(slot)(.*?)\/>/g, '<$1$2></$1>')
+    .replace(/(?=[>|\n])\s+|\r+/g, '')
 
   return parsedHtml
 }

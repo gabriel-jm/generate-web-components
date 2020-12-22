@@ -3,5 +3,7 @@ export function css(strings: TemplateStringsArray | string[], ...values: string[
     return acc + str + (values[index] || "");
   }, "")
 
-  return fullCss
+  const minifiedCss = fullCss.replace(/\s|\r|\n/g, '')
+
+  return minifiedCss
 }
