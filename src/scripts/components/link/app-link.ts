@@ -7,9 +7,17 @@ class Link extends ComponentClass {
     this.select('a').addEventListener('mousedown', e => {
       e.preventDefault()
 
-      history.pushState(null, '', this.href)
+      this.verifyCurrentPath()
       window.dispatchEvent(new Event('popstate'))
     })
+  }
+
+  verifyCurrentPath() {
+    if(this.href === location.pathname) {
+      return history.replaceState(null, '', this.href)
+    }
+
+    history.pushState(null, '', this.href)
   }
 
   render() {
