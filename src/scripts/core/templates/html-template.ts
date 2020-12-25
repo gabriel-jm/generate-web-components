@@ -33,6 +33,7 @@ export function html(strings: TemplateStringsArray | string[], ...values: (strin
     )
     .replace(/<(slot)(.*?)\/>/g, '<$1$2></$1>')
     .replace(/(?=[>|\n])\s+|\r+/g, '')
+  ;
 
   return parsedHtml
 }
