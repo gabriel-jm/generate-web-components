@@ -38,7 +38,10 @@ export async function generateComponent(
   })()
 
   if(styles) {
-    template?.appendChild(styles)
+    template?.content.insertBefore(
+      styles,
+      template.firstChild as Node
+    )
   }
 
   const Component = createComponent(template, actionsDefinition, configs)
