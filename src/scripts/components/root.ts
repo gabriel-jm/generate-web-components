@@ -30,7 +30,6 @@ class AppRoot extends ComponentClass {
       <div>
         <${this.handleUrl()}/>
       </div>
-      <app-link href="/register">teste</app-link>
     `
   }
 }

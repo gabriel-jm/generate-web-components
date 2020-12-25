@@ -1,7 +1,7 @@
 import { generateComponent } from '../../core/component-factory/index.js'
 import { html } from '../../core/templates/index.js'
 
-function Home () {
+function Home() {
 
 }
 
@@ -13,5 +13,8 @@ generateComponent(Home, {
       <input type="text" />
       <button>LogIn</button>
     </form>
-  `
+
+    <app-link href="/register">teste</app-link>
+  `,
+  cssPath: 'scripts/components/home/home.css'
 })
