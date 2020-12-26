@@ -2,9 +2,3 @@ form input {
   display: block;
   margin: 6px 0;
 }
-
-form button {
-  padding: 8px 14px;
-  border: 1px solid #333;
-  cursor: pointer;
-}

@@ -1,5 +1,7 @@
 import { generateComponent } from '../../core/component-factory/index.js'
 import { Component } from '../../core/component-factory/types.js'
+import router from '../../core/router/index.js'
+import userService from '../../store/services/user-service.js'
 
 generateComponent(Register, {
   tag: 'app-register',
@@ -12,12 +14,18 @@ function Register(element: Component) {
 
   form.addEventListener('submit', e => {
     e.preventDefault()
-    const values = {
+    
+    const user = {
       name: form.nome.value,
       username: form.username.value,
       password: form.password.value
     }
 
-    
+    Object.keys(user).forEach(value => {
+      if(!user[value]) throw value + ' is empty!'
+    })
+
+    userService.save(user)
+    router.go('/')
   })
 }
