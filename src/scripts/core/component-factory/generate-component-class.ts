@@ -4,7 +4,6 @@ import {
   attrChangeCallback,
   AttributeChangeDef,
   ComponentActions,
-  ComponentObject,
   FunctionComponentAction
 } from './types'
 

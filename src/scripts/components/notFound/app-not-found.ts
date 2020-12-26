@@ -1,7 +1,5 @@
 import { generateComponent } from '../../core/component-factory/index.js'
 
-console.log()
-
 generateComponent(null, {
   tag: 'app-not-found',
   // @ts-ignore
