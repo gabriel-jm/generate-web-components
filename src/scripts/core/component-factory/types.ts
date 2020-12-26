@@ -11,7 +11,7 @@ export type attributeChangeListenerAdder = (
   callback: attrChangeCallback
 ) => void
 
-export interface ComponentActions {
+export type ComponentActions = {
   init?(): void
   remove?(): void
   attrChange?: attrChangeCallback
@@ -41,9 +41,10 @@ export class ComponentClass {
   [key: string]: any
 }
 
-export type ComponentObject = {
+export type ComponentObject = ComponentActions & {
   readonly element: Component
   readonly select: (query: string) => HTMLElement
   readonly root: HTMLElement
   readonly onAttributeChange: attributeChangeListenerAdder
+  [key: string]: any
 }

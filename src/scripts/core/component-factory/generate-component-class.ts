@@ -4,6 +4,7 @@ import {
   attrChangeCallback,
   AttributeChangeDef,
   ComponentActions,
+  ComponentObject,
   FunctionComponentAction
 } from './types'
 
@@ -18,7 +19,7 @@ export default (
   const kGenerateActions = Symbol('kGenerateActions')
   
   const Component = class extends HTMLElement {
-    #actions: ComponentActions | FunctionComponentAction | null = null
+    #actions: ComponentActions & { [key: string]: any } | FunctionComponentAction | null = null
     #removeCallback?: (element: HTMLElement) => void
     #attrCallbacks = new Map()
 
@@ -132,18 +133,9 @@ export default (
       ;
 
       if(typeof this.#actions === 'object') {
-        Object.defineProperties(this.#actions, {
-          element: {
-            value: this,
-            enumerable: true
-          },
-          select: {
-            value: this.select.bind(this)
-          },
-          onAttributeChange: {
-            value: this.#addAttributeListener
-          }
-        })
+        this.#actions.element = this
+        this.#actions.select = this.select.bind(this)
+        this.#actions.onAttributeChange = this.#addAttributeListener
       }
     }
 
