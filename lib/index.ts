@@ -7,7 +7,7 @@ const mimeTypes: { [key: string]: string } = {
   html: 'text/html',
   css: 'text/css',
   js: 'text/javascript',
-  ico: 'image/icon'
+  jpg: 'image/jpeg'
 }
 
 function runServer(files: PathMap[]) {
@@ -51,14 +51,14 @@ function runServer(files: PathMap[]) {
     res.end()
   }
 
-  const port = 8000
+  const port = 3300
   server.listen(port, () => Logger.startServer(port))
 }
 
 async function run() {
   const compileResult = await rummageFolder({
     initialFolder: 'src',
-    extensions: ['html', 'ico', 'css', 'js']
+    extensions: ['html', 'jpg', 'css', 'js']
   })
 
   if(compileResult.success == true) {
