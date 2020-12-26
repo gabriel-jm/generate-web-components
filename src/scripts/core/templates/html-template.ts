@@ -11,6 +11,7 @@ export function html(strings: TemplateStringsArray | string[], ...values: (strin
     return !value
       ? ''
       : value
+        .toString()
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/javascript:/, '')
