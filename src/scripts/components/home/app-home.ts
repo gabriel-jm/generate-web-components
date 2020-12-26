@@ -2,6 +2,7 @@ import { generateComponent } from '../../core/component-factory/index.js'
 import { Component } from '../../core/component-factory/types.js'
 import router from '../../core/router/index.js'
 import { css, html } from '../../core/templates/index.js'
+import { globalConfigs }  from '../../store/global.js'
 import userService from '../../store/services/user-service.js'
 
 function Home(element: Component) {
@@ -21,9 +22,13 @@ function Home(element: Component) {
 
     const user = userService.findByUsernameAndPassword(credentials)
 
-    user
-      ? router.go('/dashboard')
-      : console.log('Ladrão')
+    if(user) {
+      globalConfigs.currentUser = user
+      router.go('/dashboard')
+      return
+    }
+    
+    console.log('Ladrão')
   })
 }
 
