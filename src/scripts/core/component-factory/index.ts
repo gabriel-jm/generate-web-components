@@ -32,9 +32,14 @@ export async function generateComponent(
   const styles = await (async () => {
     if(!cssPath && !cssString) return null
 
-    return cssString
-      ? generateStyleTag(styles)
-      : await findCss(cssPath || '')
+    const inline = cssString || ''
+    const styles = cssPath
+      ? await findCss(cssPath)
+      : document.createElement('style')
+    ;
+
+    styles.innerHTML += inline
+    return styles
   })()
 
   if(styles) {
