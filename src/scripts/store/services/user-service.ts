@@ -7,10 +7,10 @@ interface User {
 }
 
 class UserService {
-  path = '/users'
+  #path = '/users'
 
   save(data: User) {
-    return api.post(this.path, data)
+    return api.post(this.#path, data)
   }
 }
 
