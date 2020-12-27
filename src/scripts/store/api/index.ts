@@ -1,6 +1,9 @@
+import generateId from './generate-id.js'
+
 const prefix = 'my-app:'
 
 export const api = {
+  
   get(path: string, id?: number) {
     const response = localStorage.getItem(prefix + path) || '[]'
     
@@ -12,8 +15,10 @@ export const api = {
 
     return JSON.parse(response)
   },
+
   post(path: string, data: any) {
     const allItems = this.get(path)
+    data.id = generateId(allItems)
 
     allItems.push(data)
 
@@ -21,6 +26,7 @@ export const api = {
 
     return data
   },
+
   put(path: string, data: any) {
     const allItems = this.get(path)
     const item = allItems.find(
@@ -33,6 +39,7 @@ export const api = {
 
     return item
   },
+
   delete(path: string, id: number) {
     const allItems = this.get(path)
     const filtered = allItems.filter(
@@ -41,4 +48,5 @@ export const api = {
 
     localStorage.setItem(prefix + path, JSON.stringify(filtered))
   }
+
 }
