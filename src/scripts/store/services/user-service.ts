@@ -25,8 +25,14 @@ class UserService {
     return api.post(this.#path, data)
   }
 
-  setCurrentUser(data: User) {
+  getCurrentUser() {
+    const user = localStorage.getItem('my-app:current-user')
 
+    return user ? JSON.parse(user) : null
+  }
+
+  setCurrentUser(data: User) {
+    localStorage.setItem('my-app:current-user', JSON.stringify(data))
   }
 }
 
