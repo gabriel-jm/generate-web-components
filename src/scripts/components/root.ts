@@ -19,7 +19,7 @@ class AppRoot extends ComponentClass {
 
   render() {
     return html`
-      <h1>Meu App</h1>
+      <app-title />
 
       <div>
         <${router.handleUrl()}/>
