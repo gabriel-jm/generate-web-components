@@ -25,8 +25,7 @@ function Login(element: Component) {
     if(user) {
       globalConfigs.currentUser = user
       userService.setCurrentUser(user)
-      router.go('/dashboard')
-      return
+      return router.go('/dashboard')
     }
     
     console.log('Ladrão')

@@ -15,6 +15,8 @@ export default {
   },
 
   go(path: string) {
+    if(path === window.location.pathname) return;
+
     history.pushState(null, '', path)
     window.dispatchEvent(new Event('popstate'))
   }
