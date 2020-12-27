@@ -1,6 +1,6 @@
 import './link/app-link.js'
 import './title/app-title.js'
-import './home/app-home.js'
+import './login/app-login.js'
 import './register/app-register.js'
 import './notFound/app-not-found.js'
 import './root.js'

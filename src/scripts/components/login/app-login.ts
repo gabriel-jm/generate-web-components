@@ -5,7 +5,7 @@ import { css, html } from '../../core/templates/index.js'
 import { globalConfigs }  from '../../store/global.js'
 import userService from '../../store/services/user-service.js'
 
-function Home(element: Component) {
+function Login(element: Component) {
   const form = element.select('form') as HTMLFormElement
 
   form.addEventListener('submit', e => {
@@ -24,6 +24,7 @@ function Home(element: Component) {
 
     if(user) {
       globalConfigs.currentUser = user
+      userService.setCurrentUser(user)
       router.go('/dashboard')
       return
     }
@@ -32,8 +33,8 @@ function Home(element: Component) {
   })
 }
 
-generateComponent(Home, {
-  tag: 'app-home',
+generateComponent(Login, {
+  tag: 'app-login',
   htmlString: html`
     <form>
       <input name="username" type="text" placeholder="username" />
