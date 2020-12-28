@@ -1,13 +1,13 @@
-import { generateComponent } from '../../core/component-factory/index.js'
-import { Component } from '../../core/component-factory/types.js'
-import router from '../../core/router/index.js'
-import userService from '../../store/services/user-service.js'
+import { generateComponent } from '../../../core/component-factory/index.js'
+import { Component } from '../../../core/component-factory/types.js'
+import router from '../../../core/router/index.js'
+import userService from '../../../store/services/user-service.js'
 
 generateComponent(Register, {
   tag: 'app-register',
-  htmlPath: 'scripts/components/register/app-register.html',
+  htmlPath: 'components/pages/register/app-register.html',
   cssPaths: [
-    'scripts/components/register/app-register.css',
+    'components/pages/register/app-register.css',
     'css/styles.css'
   ]
 })

@@ -6,6 +6,11 @@
       "DOM",
       "ES2019"
     ],
+    "baseUrl": "./",
+    "paths": {
+      "/*": ["*"]
+    },
+    "moduleResolution": "node",
     "strict": true,
     "noImplicitAny": false,
     "noEmitOnError": true,

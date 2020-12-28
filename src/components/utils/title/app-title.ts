@@ -1,5 +1,5 @@
-import { generateComponent } from '../../core/component-factory/index.js'
-import { css, html } from '../../core/templates/index.js'
+import { generateComponent } from '../../../core/component-factory/index.js'
+import { css, html } from '../../../core/templates/index.js'
 
 generateComponent(null, {
   tag: 'app-title',

@@ -1,7 +1,7 @@
-import { generateComponent } from '../../core/component-factory/index.js'
-import { ComponentClass } from '../../core/component-factory/types.js'
-import router from '../../core/router/index.js'
-import { html } from '../../core/templates/index.js'
+import { generateComponent } from '../../../core/component-factory/index.js'
+import { ComponentClass } from '../../../core/component-factory/types.js'
+import router from '../../../core/router/index.js'
+import { html } from '../../../core/templates/index.js'
 
 class Link extends ComponentClass {
   init() {

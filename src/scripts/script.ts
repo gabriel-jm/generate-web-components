@@ -1,1 +1,1 @@
-import './components/imports.js'
+import '../components/imports.js'

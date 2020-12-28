@@ -1,9 +1,9 @@
-import { generateComponent } from '../../core/component-factory/index.js'
-import { Component } from '../../core/component-factory/types.js'
-import router from '../../core/router/index.js'
-import { css, html } from '../../core/templates/index.js'
-import { globalConfigs }  from '../../store/global.js'
-import userService from '../../store/services/user-service.js'
+import { generateComponent } from '/core/component-factory/index.js'
+import { Component } from '/core/component-factory/types.js'
+import router from '/core/router/index.js'
+import { css, html } from '/core/templates/index.js'
+import { globalConfigs }  from '/store/global.js'
+import userService from '/store/services/user-service.js'
 
 function Login(element: Component) {
   const form = element.select('form') as HTMLFormElement

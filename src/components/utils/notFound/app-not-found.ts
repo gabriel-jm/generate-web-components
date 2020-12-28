@@ -1,4 +1,4 @@
-import { generateComponent } from '../../core/component-factory/index.js'
+import { generateComponent } from '../../../core/component-factory/index.js'
 
 generateComponent(null, {
   tag: 'app-not-found',
