@@ -11,7 +11,7 @@ function Login(element: Component) {
   form.addEventListener('submit', e => {
     e.preventDefault()
 
-    const credentials = {
+    const credentials: { username: string, password: string, [key: string]: string } = {
       username: form.username.value,
       password: form.password.value
     }

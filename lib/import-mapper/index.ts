@@ -34,9 +34,7 @@ async function tsCompiling() {
     Logger.compiling()
     
     await tsc.compile({
-      project: path.resolve(),
-      noEmitOnError: true,
-      module: 'esnext'
+      project: path.resolve('src')
     })
 
     return {
@@ -45,7 +43,7 @@ async function tsCompiling() {
   } catch(tscError) {
     const errorMessage = tscError
       .message
-      .split(']')[1]
+      .split('] ')[1]
 
     return {
       compiled: false,

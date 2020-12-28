@@ -17,15 +17,25 @@ function Register(element: Component) {
 
   form.addEventListener('submit', e => {
     e.preventDefault()
+
+    interface User {
+      name: string
+      username: string
+      password: string
+    }
+
+    interface KeyAccessor {
+      [key: string]: string
+    }
     
-    const user = {
+    const user: User & KeyAccessor = {
       name: form.nome.value,
       username: form.username.value,
       password: form.password.value
     }
 
-    Object.keys(user).forEach(value => {
-      if(!user[value]) throw value + ' is empty!'
+    Object.keys(user).forEach(key => {
+      if(!user[key]) throw key + ' is empty!'
     })
 
     userService.save(user)

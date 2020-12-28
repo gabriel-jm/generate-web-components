@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "ES2019"
+    ],
+    "strict": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "esModuleInterop": true
+  }
+}

@@ -105,7 +105,7 @@ export default (
       }
     }
 
-    [kAttributesShortcuts]() {
+    [kAttributesShortcuts](): void {
       if(watchedAttrs) {
         watchedAttrs.forEach(attr => {
           Object.defineProperty(this, attr, {
