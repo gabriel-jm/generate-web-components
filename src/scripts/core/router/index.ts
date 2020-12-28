@@ -15,9 +15,16 @@ export default {
   },
 
   go(path: string) {
-    if(path === window.location.pathname) return;
+    if(!(/^\/.*/).test(path)) {
+      throw new Error('Can\'t set a path that doesn\'t start with "/"')
+    }
 
-    history.pushState(null, '', path)
+    if(path === location.pathname) {
+      history.replaceState(null, '', path)
+    } else {
+      history.pushState(null, '', path)
+    }
+
     window.dispatchEvent(new Event('popstate'))
   }
 }

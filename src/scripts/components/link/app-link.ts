@@ -1,23 +1,15 @@
 import { generateComponent } from '../../core/component-factory/index.js'
 import { ComponentClass } from '../../core/component-factory/types.js'
+import router from '../../core/router/index.js'
 import { html } from '../../core/templates/index.js'
 
 class Link extends ComponentClass {
   init() {
-    this.select('a').addEventListener('mousedown', e => {
+    this.select('a').addEventListener('click', e => {
       e.preventDefault()
 
-      this.verifyCurrentPath()
-      window.dispatchEvent(new Event('popstate'))
+      router.go(this.href)
     })
-  }
-
-  verifyCurrentPath() {
-    if(this.href === location.pathname) {
-      return history.replaceState(null, '', this.href)
-    }
-
-    history.pushState(null, '', this.href)
   }
 
   render() {
