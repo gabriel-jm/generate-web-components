@@ -7,7 +7,7 @@ export interface ComponentConfigs {
   tag: string
   htmlPath?: string
   htmlString?: string
-  cssPath?: string
+  cssPaths?: string[]
   cssString?: string
   watchedAttrs?: string[]
   shadowDOM?: boolean
@@ -17,7 +17,7 @@ export async function generateComponent(
   actionsDefinition: Function | Object | null,
   configs: ComponentConfigs
 ) {
-  const { tag, htmlPath, htmlString, cssPath, cssString } = configs
+  const { tag, htmlPath, htmlString, cssPaths, cssString } = configs
  
   if(customElements.get(tag)) return
 
@@ -30,11 +30,11 @@ export async function generateComponent(
   })()
 
   const styles = await (async () => {
-    if(!cssPath && !cssString) return null
+    if(!cssPaths && !cssString) return null
 
     const inline = cssString || ''
-    const styles = cssPath
-      ? await findCss(cssPath)
+    const styles = cssPaths
+      ? await findCss(cssPaths)
       : document.createElement('style')
     ;
 

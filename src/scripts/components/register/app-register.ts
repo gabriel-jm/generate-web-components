@@ -6,7 +6,10 @@ import userService from '../../store/services/user-service.js'
 generateComponent(Register, {
   tag: 'app-register',
   htmlPath: 'scripts/components/register/app-register.html',
-  cssPath: 'scripts/components/register/app-register.css'
+  cssPaths: [
+    'scripts/components/register/app-register.css',
+    'css/styles.css'
+  ]
 })
 
 function Register(element: Component) {

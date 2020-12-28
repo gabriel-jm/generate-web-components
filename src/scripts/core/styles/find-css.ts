@@ -14,16 +14,28 @@ export function generateStyleTag(css: string) {
   return style
 }
 
-export async function findCss(path: string) {
+export async function findCss(paths: string[]) {
+  const allStyles = await Promise.all(
+    paths.map(path => findSingleCss(path))
+  )
+
+  const style = allStyles.reduce((acc, styles) => {
+    return acc + (styles || '')
+  }, '')
+
+  return generateStyleTag(style)
+}
+
+export async function findSingleCss(path: string) {
   const findByPath = (comp: cssRegister) => comp.path === path
   const existingCss = cssCache.find(findByPath)
 
   if(existingCss) {
-    return generateStyleTag(existingCss.css)
+    return existingCss.css
   }
 
   const css = await getCss(path)
   cssCache.push({ path, css })
 
-  return generateStyleTag(css)
+  return css
 }

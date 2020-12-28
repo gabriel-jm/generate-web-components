@@ -43,7 +43,7 @@ generateComponent(Login, {
 
     <app-link href="/register">Register</app-link>
   `,
-  cssPath: 'css/styles.css',
+  cssPaths: ['css/styles.css'],
   cssString: css`
     input {
       display: block;
