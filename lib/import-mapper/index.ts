@@ -45,6 +45,8 @@ async function tsCompiling() {
       .message
       .split('] ')[1]
 
+      console.log(tscError.message)
+
     return {
       compiled: false,
       error: errorMessage
@@ -119,7 +121,7 @@ function startRun({ initialFolder, extensions }: Omit<RummageFolderOptions, 'usi
     extensions
   })
 
-  return {
+  return <CompilingSuccess> {
     success: true,
     paths
   }

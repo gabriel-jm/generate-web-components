@@ -64,7 +64,7 @@ async function run() {
   if(compileResult.success == true) {
     runServer(compileResult.paths)
   } else {
-    Logger.tscError(compileResult)
+    //Logger.tscError(compileResult)
   }
 }
 
