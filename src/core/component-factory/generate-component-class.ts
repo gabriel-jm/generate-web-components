@@ -10,7 +10,8 @@ import {
 export default (
   template: HTMLTemplateElement | null,
   actionsDef: Function | Object | ObjectConstructor | null,
-  configs: ComponentConfigs
+  configs: ComponentConfigs,
+  styles: HTMLStyleElement | null
 ) => {
   const { watchedAttrs, shadowDOM = true  } = configs
   const kAttributesShortcuts = Symbol('kAttributesShortcuts')
@@ -139,6 +140,7 @@ export default (
     }
 
     [kInnerHTML]() {
+      console.log(template)
       if(template) {
         if(shadowDOM) {
           this.shadowRoot?.appendChild(
@@ -155,6 +157,15 @@ export default (
         this.#actions.render
       ) {
         this.root.innerHTML = this.#actions.render()
+
+        if(styles) {
+          this.root.insertBefore(
+            styles,
+            this.root.firstChild
+          )
+        }
+
+        console.log(this.root.innerHTML)
       }
     }
 

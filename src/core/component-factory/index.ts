@@ -49,7 +49,12 @@ export async function generateComponent(
     )
   }
 
-  const Component = createComponent(template, actionsDefinition, configs)
+  const Component = createComponent(
+    template,
+    actionsDefinition,
+    configs,
+    styles
+  )
   
   customElements.define(tag, Component)
 }
