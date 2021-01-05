@@ -34,6 +34,10 @@ class UserService {
   setCurrentUser(data: User) {
     localStorage.setItem('my-app:current-user', JSON.stringify(data))
   }
+
+  logout() {
+    localStorage.removeItem('my-app:current-user')
+  }
 }
 
 export default new UserService()
