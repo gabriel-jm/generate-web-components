@@ -140,7 +140,6 @@ export default (
     }
 
     [kInnerHTML]() {
-      console.log(template)
       if(template) {
         if(shadowDOM) {
           this.shadowRoot?.appendChild(
@@ -164,8 +163,6 @@ export default (
             this.root.firstChild
           )
         }
-
-        console.log(this.root.innerHTML)
       }
     }
 

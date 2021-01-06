@@ -5,6 +5,13 @@ import { css, html } from '/core/templates/index.js'
 import { globalConfigs }  from '/store/global.js'
 import userService from '/store/services/user-service.js'
 
+function makeLogin() {
+  const appRoot = document.querySelector('app-root')
+  const appTitle = appRoot?.querySelector('app-title') as Element & { logIn(): void }
+
+  appTitle.logIn()
+}
+
 function Login(element: Component) {
   const form = element.select('form') as HTMLFormElement
 
@@ -25,6 +32,7 @@ function Login(element: Component) {
     if(user) {
       globalConfigs.currentUser = user
       userService.setCurrentUser(user)
+      makeLogin()
       return router.go('/dashboard')
     }
     
