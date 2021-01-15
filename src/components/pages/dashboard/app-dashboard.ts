@@ -14,7 +14,7 @@ const dashboard = <ComponentObject> {
 
   render() {
     return html`
-      <h2>Bem vindo! ${globalConfigs.currentUser?.name}</h2>
+      <h2>Bem vindo! ${globalConfigs.currentUser?.name as string}</h2>
     `
   }
 }
