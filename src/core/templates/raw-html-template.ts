@@ -6,6 +6,10 @@ export class RawHTML {
   constructor(public html: string) {
     this.isSafe = true
   }
+
+  valueOf() {
+    return this.html
+  }
 }
 
 export function raw(strings: TemplateStringsArray | string[], ...values: string[]) {
@@ -25,10 +29,8 @@ export function raw(strings: TemplateStringsArray | string[], ...values: string[
         return `<${name}${attributes}></${name}>`
       }
     )
-    .replace(
-      /<(slot)(.*?)\/>/g,
-      '<$1$2></$1>'
-    )
+    .replace(/<(slot)(.*?)\/>/g, '<$1$2></$1>')
+  ;
 
   return new RawHTML(parsedHtml)
 }
