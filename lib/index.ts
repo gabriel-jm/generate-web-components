@@ -61,10 +61,10 @@ async function run() {
     extensions: ['html', 'jpg', 'css', 'js']
   })
 
-  if(compileResult.success == true) {
+  if(compileResult.success) {
     runServer(compileResult.paths)
   } else {
-    //Logger.tscError(compileResult)
+    Logger.tscError(compileResult)
   }
 }
 
