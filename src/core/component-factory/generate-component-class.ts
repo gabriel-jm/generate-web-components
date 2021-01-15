@@ -58,9 +58,7 @@ export default (
       this[kAttributesShortcuts]()
 
       this[kInnerHTML]()
-    }
-  
-    async connectedCallback() {
+
       if(!this.#actions) return
 
       if(typeof this.#actions === 'object') {
