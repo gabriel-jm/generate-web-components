@@ -11,37 +11,49 @@ export type TitleElement = HTMLElement & {
 }
 
 type TitleComponent = ComponentObject & {
+  isLoged: boolean
   readonly logInDetails: RawHTML
 }
 
 const Title = <TitleComponent> {
+  isLoged: false,
+
+  init() {
+    globalConfigs.logOut = () => {
+      this.isLoged = false
+      userService.logout()
+      this.select('.user-details-container').remove()
+      router.go('/')
+    }
+
+    globalConfigs.logIn = () => {
+      if (!globalConfigs.currentUser) return
+
+      !this.isLoged && (
+        this.select('.container').innerHTML += this.logInDetails
+      )
+
+      const logoutBtn = this.select('button')
+      logoutBtn?.addEventListener('click', () => globalConfigs.logOut())
+
+      this.isLoged = true
+      
+      return true
+    }
+
+    globalConfigs.logIn()
+  },
+
   get logInDetails() {
     return raw`
       <div class="user-details-container">
         <span>
-          ${globalConfigs.currentUser.name}
+          ${globalConfigs.currentUser?.name as string}
         </span>
 
         <button class="btn">Log out</button>
       </div>
     `
-  },
-
-  init() {
-    this.element.logIn = () => {
-      if (!globalConfigs.currentUser) return
-
-      this.select('.container').innerHTML += this.logInDetails
-
-      const logoutBtn = this.select('button')
-      logoutBtn?.addEventListener('click', () => {
-        userService.logout()
-        this.select('.user-details-container').remove()
-        router.go('/')
-      })
-    }
-
-    this.element.logIn()
   },
 
   render() {

@@ -1,3 +1,9 @@
+:host {
+  width: fit-content;
+  display: block;
+  margin: auto;
+}
+
 form input {
   display: block;
   margin: 8px 0;

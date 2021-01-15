@@ -1,4 +1,3 @@
-import { TitleElement } from '/components/utils/title/app-title'
 import { generateComponent } from '/core/component-factory/index.js'
 import { Component } from '/core/component-factory/types.js'
 import router from '/core/router/index.js'
@@ -7,10 +6,7 @@ import { globalConfigs }  from '/store/global.js'
 import userService from '/store/services/user-service.js'
 
 function makeLogin() {
-  const appRoot = document.querySelector('app-root')
-  const appTitle = appRoot?.querySelector('app-title') as TitleElement
-
-  appTitle.logIn()
+  return globalConfigs.logIn()
 }
 
 function Login(element: Component) {
@@ -33,17 +29,17 @@ function Login(element: Component) {
     if(user) {
       globalConfigs.currentUser = user
       userService.setCurrentUser(user)
-      makeLogin()
-      return router.go('/dashboard')
+      const successLogin = makeLogin()
+      successLogin && router.go('/dashboard')
     }
-    
-    console.log('Ladrão')
   })
 }
 
 generateComponent(Login, {
   tag: 'app-login',
   htmlString: html`
+    <h2>Login</h2>
+
     <form>
       <input name="username" type="text" placeholder="username" />
       <input name="password" type="password" placeholder="password" />
@@ -54,6 +50,12 @@ generateComponent(Login, {
   `,
   cssPaths: ['css/styles.css'],
   cssString: css`
+    :host {
+      width: fit-content;
+      display: block;
+      margin: auto;
+    }
+
     input {
       display: block;
       margin: 8px 0;
