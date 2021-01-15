@@ -29,7 +29,7 @@ const Title = <TitleComponent> {
     this.element.logIn = () => {
       if(!globalConfigs.currentUser) return
 
-      this.element.root.innerHTML += this.logInDetails.html
+      this.select('.container').innerHTML += this.logInDetails
       
       const logoutBtn = this.select('button')
       logoutBtn?.addEventListener('click', () => {
@@ -44,11 +44,9 @@ const Title = <TitleComponent> {
 
   render() {
     return html`
-      <h1>My App</h1>
-
-      ${globalConfigs.currentUser && (
-        this.logInDetails.html
-      )}
+      <div class="container">
+        <h1>My App</h1>
+      </div>
     `
   }
 }
@@ -57,22 +55,26 @@ generateComponent(Title, {
   tag: 'app-title',
   cssPaths: ['css/styles.css'],
   cssString: css`
-    :host {
+    .container {
       display: flex;
       background-color: #333;
       padding: 16px 12px;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-sizing: border-box;
     }
 
     h1 {
       margin: 0;
       color: white;
+      width: 110px;
     }
 
     .user-details-container {
       color: white;
       font-size: 1.1rem;
+      width: 200px;
     }
 
     button.btn {
