@@ -4,8 +4,15 @@ import { ComponentObject } from '/core/component-factory/types.js'
 import { globalConfigs } from '/store/global.js'
 import userService from '/store/services/user-service.js'
 import router from '/core/router/index.js'
+import { RawHTML } from '/core/templates/raw-html-template.js'
 
-type TitleComponent = ComponentObject & any
+export type TitleElement = HTMLElement & {
+  logIn(): void
+}
+
+type TitleComponent = ComponentObject & {
+  readonly logInDetails: RawHTML
+}
 
 const Title = <TitleComponent> {
   get logInDetails() {
@@ -21,16 +28,11 @@ const Title = <TitleComponent> {
   },
 
   init() {
-    const h1 = this.select('h1')
-    h1.tabIndex = 0
-    h1.addEventListener('focus', () => console.log('open'))
-    h1.addEventListener('focusout', () => console.log('close'))
-
     this.element.logIn = () => {
-      if(!globalConfigs.currentUser) return
+      if (!globalConfigs.currentUser) return
 
       this.select('.container').innerHTML += this.logInDetails
-      
+
       const logoutBtn = this.select('button')
       logoutBtn?.addEventListener('click', () => {
         userService.logout()

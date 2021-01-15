@@ -1,3 +1,4 @@
+import { TitleElement } from '/components/utils/title/app-title'
 import { generateComponent } from '/core/component-factory/index.js'
 import { Component } from '/core/component-factory/types.js'
 import router from '/core/router/index.js'
@@ -7,7 +8,7 @@ import userService from '/store/services/user-service.js'
 
 function makeLogin() {
   const appRoot = document.querySelector('app-root')
-  const appTitle = appRoot?.querySelector('app-title') as Element & { logIn(): void }
+  const appTitle = appRoot?.querySelector('app-title') as TitleElement
 
   appTitle.logIn()
 }
