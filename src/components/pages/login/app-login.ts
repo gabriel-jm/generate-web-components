@@ -33,6 +33,11 @@ function Login(element: Component) {
       successLogin && router.go('/dashboard')
     }
   })
+
+  if(globalConfigs.currentUser) {
+    const successLogin = makeLogin()
+    successLogin && router.go('/dashboard')
+  }
 }
 
 generateComponent(Login, {
@@ -46,7 +51,7 @@ generateComponent(Login, {
       <button class="btn">Log in</button>
     </form>
 
-    <app-link href="/register">Register</app-link>
+    <app-link class="btn link" href="/register">Register</app-link>
   `,
   cssPaths: ['css/styles.css'],
   cssString: css`
@@ -54,11 +59,21 @@ generateComponent(Login, {
       width: fit-content;
       display: block;
       margin: auto;
+      padding: 10px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
     }
 
     input {
       display: block;
       margin: 8px 0;
+    }
+
+    .link {
+      margin-top: 8px;
+      color: #333;
     }
   `
 })
