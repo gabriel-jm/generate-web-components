@@ -30,6 +30,12 @@ h1 {
   cursor: pointer;
   outline: 0;
   position: relative;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.more:focus {
+  background-color: #7778;
 }
 
 .user-options {
