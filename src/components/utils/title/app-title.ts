@@ -25,7 +25,7 @@ const Title = <TitleComponent> {
       userService.logout()
       globalConfigs.currentUser = null
       this.isLoged = false
-      this.select('.user-details-container').remove()
+      this.select('.user-details-container')?.remove()
       router.go('/')
     }
 
