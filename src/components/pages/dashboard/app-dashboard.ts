@@ -4,8 +4,9 @@ import router from '/core/router/index.js'
 import { html } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'
 
-const dashboard = <ComponentObject> {
+type Dashboard = ComponentObject & {}
 
+const dashboard = <Dashboard> {
   init() {
     if(!globalConfigs.currentUser) {
       router.go('/')
