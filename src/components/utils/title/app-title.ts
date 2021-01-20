@@ -14,6 +14,7 @@ type TitleComponent = ComponentObject & {
   isLoged: boolean
   readonly logInDetails: RawHTML
   configLogInAndLogOut(): void
+  addEvents(): void
 }
 
 const Title = <TitleComponent> {
@@ -21,8 +22,9 @@ const Title = <TitleComponent> {
 
   configLogInAndLogOut() {
     globalConfigs.logOut = () => {
-      this.isLoged = false
       userService.logout()
+      globalConfigs.currentUser = null
+      this.isLoged = false
       this.select('.user-details-container').remove()
       router.go('/')
     }
@@ -38,6 +40,7 @@ const Title = <TitleComponent> {
       logoutBtn?.addEventListener('click', () => globalConfigs.logOut())
 
       this.isLoged = true
+      this.addEvents()
       
       return true
     }
@@ -48,16 +51,26 @@ const Title = <TitleComponent> {
   init() {
     this.configLogInAndLogOut()
 
-    const userOptionsIcon = this.select('.more')
-    const userOptionsMenu = this.select('.user-options')
+    this.addEvents()
+  },
 
-    userOptionsIcon.addEventListener('focus', () => {
-      userOptionsMenu.classList.add('show')
-    })
+  addEvents() {
+    if(globalConfigs.currentUser) {
+      const userOptionsIcon = this.select('.more')
+      const userOptionsMenu = this.select('.user-options')
 
-    userOptionsIcon.addEventListener('focusout', () => {
-      userOptionsMenu.classList.remove('show')
-    })
+      userOptionsIcon.addEventListener('focus', () => {
+        userOptionsMenu.classList.add('show')
+      })
+
+      userOptionsIcon.addEventListener('focusout', () => {
+        userOptionsMenu.classList.remove('show')
+      })
+    
+      this.select('[log-out]').addEventListener('click', () => {
+        globalConfigs.logOut()
+      })
+    }
   },
 
   get logInDetails() {
@@ -76,7 +89,7 @@ const Title = <TitleComponent> {
 
           <ul class="user-options">
             <li>Settings</li>
-            <li>Log out</li>
+            <li log-out>Log out</li>
           </ul>
         </div>
       </div>
@@ -94,72 +107,5 @@ const Title = <TitleComponent> {
 
 generateComponent(Title, {
   tag: 'app-title',
-  cssPaths: ['css/styles.css'],
-  cssString: css`
-    .container {
-      display: flex;
-      background-color: #333;
-      padding: 16px 12px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      box-sizing: border-box;
-    }
-
-    h1 {
-      margin: 0;
-      color: white;
-      width: 110px;
-    }
-
-    .user-details-container {
-      color: white;
-      font-size: 1.1rem;
-      width: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0 6px;
-    }
-
-    .more {
-      color: white;
-      height: 24px;
-      cursor: pointer;
-      outline: 0;
-      position: relative;
-    }
-
-    .user-options {
-      --scale: 0;
-
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background-color: white;
-      border: 0;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px #3335;
-      color: #333;
-      list-style: none;
-      padding: 8px 0;
-      transform: scale(var(--scale));
-      transform-origin: top right;
-      transition: transform 0.18s;
-    }
-
-    .user-options.show {
-      --scale: 1;
-    }
-
-    .user-options li {
-      font-size: 0.95rem;
-      padding: 4px 16px;
-      transition: all 0.3s;
-    }
-
-    .user-options li:hover {
-      background-color: #eee;
-    }
-  `
+  cssPaths: ['css/styles.css', 'components/utils/title/app-title.css']
 })
