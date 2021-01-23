@@ -1,5 +1,5 @@
 import { generateComponent } from '/core/component-factory/index.js'
-import { attrChangeListener, Component } from '/core/component-factory/types.js'
+import { Component } from '/core/component-factory/types.js'
 import { css, html } from '/core/templates/index.js'
 
 export interface Modal extends Component {
@@ -7,11 +7,7 @@ export interface Modal extends Component {
   close(): void
 }
 
-function Modal(element: Modal, onAttrChange: attrChangeListener) {
-  onAttrChange('open', () => {
-    console.log(element.hasAttribute('open'))
-  })
-
+function Modal(element: Modal) {
   element.show = () => element.setAttribute('open', '')
   element.close = () => element.removeAttribute('open')
 }
@@ -41,7 +37,7 @@ generateComponent(Modal, {
     }
 
     div {
-      height: fit-content;
+      height: max-content;
       margin-top: 20px;
       background-color: white;
       padding: 28px;

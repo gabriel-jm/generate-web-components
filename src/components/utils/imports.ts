@@ -1,3 +1,5 @@
 import './link/app-link.js'
 import './title/app-title.js'
 import './notFound/app-not-found.js'
+import './modal/app-modal.js'
+import './user-info/app-user-info.js'
