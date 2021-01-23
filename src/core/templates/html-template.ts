@@ -2,7 +2,9 @@ import { RawHTML } from './raw-html-template.js'
 
 const regExp = /<([a-zA-Z0-9\-]+)\s(.*)\/>/g
 
-export function html(strings: TemplateStringsArray | string[], ...values: (string | RawHTML)[]) {
+type htmlValues = (number | boolean | string | RawHTML)[]
+
+export function html(strings: TemplateStringsArray | string[], ...values: htmlValues) {
   values = values.map((value) => {
     if(value instanceof RawHTML) {
       return value.isSafe ? value.html : ''
