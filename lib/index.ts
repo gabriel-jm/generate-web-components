@@ -26,7 +26,12 @@ function runServer(files: PathMap[]) {
     try {
       const fileContent = await loadFileContent(filePath)
 
-      res.writeHead(200, { 'Content-Type': contentType })
+      const configs = {
+        'Content-Type': `${contentType}; charset=utf-8`,
+        'Cache-Control': 'no-cache',
+        'X-Content-Type-Options': 'nosniff'
+      }
+      res.writeHead(200, configs)
       res.end(fileContent)
     } catch(err) {
       console.log(err.message)
