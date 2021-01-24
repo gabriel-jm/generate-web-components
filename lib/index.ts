@@ -31,6 +31,7 @@ function runServer(files: PathMap[]) {
         'Cache-Control': 'no-cache',
         'X-Content-Type-Options': 'nosniff'
       }
+      
       res.writeHead(200, configs)
       res.end(fileContent)
     } catch(err) {
