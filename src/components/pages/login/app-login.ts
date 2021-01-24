@@ -56,7 +56,7 @@ generateComponent(Login, {
   cssPaths: ['css/styles.css'],
   cssString: css`
     :host {
-      width: fit-content;
+      width: max-content;
       display: block;
       margin: auto;
       padding: 10px;
