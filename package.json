@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node lib",
-    "dev": "nodemon --exec ts-node lib",
-    "build": "tsc --module esnext"
+    "dev": "nodemon --exec ts-node lib"
   },
   "nodemonConfig": {
     "watch": [
