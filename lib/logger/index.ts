@@ -29,7 +29,7 @@ export class Logger {
     )
   }
 
-  static startServer(port: number) {
+  static startServer(port: string | number) {
     console.clear()
     console.log(
       colors.cyan('[INFO]'),
