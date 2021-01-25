@@ -22,7 +22,12 @@ class UserService {
   }
 
   save(data: Omit<User, 'id'>) {
-    return api.post(this.#path, data)
+    const existedUser = api
+      .get(this.#path)
+      .find((user: User) => user.username === data.username)
+    ;
+
+    return existedUser ? null : api.post(this.#path, data)
   }
 
   getCurrentUser() {

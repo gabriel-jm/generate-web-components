@@ -38,7 +38,7 @@ function Register(element: Component) {
       if(!user[key]) throw key + ' is empty!'
     })
 
-    userService.save(user)
-    router.go('/')
+    const wasInserted = userService.save(user)
+    wasInserted && router.go('/')
   })
 }
