@@ -48,10 +48,13 @@ generateComponent(Login, {
     <form>
       <input name="username" type="text" placeholder="username" />
       <input name="password" type="password" placeholder="password" />
-      <button class="btn">Log in</button>
+      <div class="form-actions">
+        <button class="btn">Log in</button>
+        <app-link class="btn" href="/register">
+          Register
+        </app-link>
+      </div>
     </form>
-
-    <app-link class="btn link" href="/register">Register</app-link>
   `,
   cssPaths: ['css/styles.css'],
   cssString: css`
@@ -72,9 +75,15 @@ generateComponent(Login, {
       margin: 8px 0;
     }
 
-    .link {
-      margin-top: 8px;
-      color: #333;
+    .form-actions {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .form-actions > .btn {
+      font-size: 0.9rem;
     }
   `
 })
