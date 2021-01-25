@@ -1,6 +1,6 @@
 interface GlobalConfigs {
   [key: string]: any
-  currentUser: { name: string } | null
+  currentUser: { name: string, username: string } | null
   logIn(): true | undefined
   logOut(): void
 }

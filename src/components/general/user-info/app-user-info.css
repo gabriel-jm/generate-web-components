@@ -44,8 +44,41 @@
   background-color: #eee;
 }
 
-.user-modal h2 {
+.user-modal::part(container) {
+  width: 450px;
+  margin: 8px;
+}
+
+.user-modal-header {
   color: #333;
-  margin: 0;
+  margin: 0 0 20px;
   border-bottom: 1px solid #777;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-modal-header h2 {
+  margin: 0;
+}
+
+.user-modal-header button {
+  color: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.user-details {
+  color: #333;
+  line-height: 1.5;
+  background-color: #3331;
+  padding: 14px;
+  border-radius: 4px;
+}
+
+.user-details > span {
+  font-weight: bold;
 }

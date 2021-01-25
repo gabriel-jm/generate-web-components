@@ -4,6 +4,8 @@ import { html } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'
 
 export class UserInfo extends ComponentClass {
+  user = globalConfigs.currentUser
+
   init() {
     const modal = this.select('app-modal') as Modal
     const userOptionsIcon = this.select('.more')
@@ -23,6 +25,7 @@ export class UserInfo extends ComponentClass {
 
     this.select('[settings]').addEventListener('click', () => {
       modal.show()
+      userOptionsIcon.dispatchEvent(new Event('focusout'))
     })
 
     this.select('.close-modal').addEventListener('click', () => {
@@ -46,9 +49,15 @@ export class UserInfo extends ComponentClass {
       </div>
 
       <app-modal class="user-modal">
-        <h2>User Info</h2>
+        <div class="user-modal-header">
+          <h2>User Info</h2>
+          <button class="close-modal">X</button>
+        </div>
 
-        <button class="close-modal">close modal</button>
+        <div class="user-details">
+          <span>Name</span> ${this.user?.name as string}<br/>
+          <span>Username</span> ${this.user?.username as string}
+        </div>
       </app-modal>
     `
   }
