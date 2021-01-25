@@ -1,4 +1,4 @@
-import { Modal } from '../modal/app-modal.js'
+import { Modal } from '../../utils/modal/app-modal.js'
 import { ComponentClass } from '/core/component-factory/types.js'
 import { html } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'

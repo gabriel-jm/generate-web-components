@@ -73,5 +73,5 @@ const Title = <TitleComponent> {
 
 generateComponent(Title, {
   tag: 'app-title',
-  cssPaths: ['css/styles.css', 'components/utils/title/app-title.css']
+  cssPaths: ['css/styles.css', 'components/general/title/app-title.css']
 })

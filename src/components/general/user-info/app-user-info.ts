@@ -5,6 +5,6 @@ generateComponent(UserInfo, {
   tag: 'app-user-info',
   cssPaths: [
     'css/styles.css',
-    'components/utils/user-info/app-user-info.css'
+    '_DIRNAME/app-user-info.css'
   ]
 })
