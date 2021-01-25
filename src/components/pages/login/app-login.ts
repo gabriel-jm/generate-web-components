@@ -63,7 +63,8 @@ generateComponent(Login, {
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 2.1rem;
+      margin: 12px 0;
     }
 
     input {

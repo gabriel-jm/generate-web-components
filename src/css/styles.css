@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+input, button {
+  font-family: inherit;
+}
+
 input {
   background-color: transparent;
   border: 1px solid #bbb;
