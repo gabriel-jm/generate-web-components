@@ -1,6 +1,5 @@
 import { Logger } from '../logger'
 import { startRun } from './files-searcher'
-import { tsCompiling } from './ts-compiling'
 
 export interface PathMap {
   path: string
@@ -27,6 +26,7 @@ export async function rummageFolder(options: RummageFolderOptions) {
   const { initialFolder, extensions, usingTS = true } = options
 
   if(usingTS) {
+    const tsCompiling = require('./ts-compiling')
     const procced = await tsCompiling()
 
     if(!procced.compiled) {
