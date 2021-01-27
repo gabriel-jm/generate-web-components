@@ -18,6 +18,13 @@ export async function startRun({ initialFolder, extensions }: Omit<RummageFolder
       const childStats = await fs.lstat(folderPath)
       const [, extname] = child.split('.')
       const matchExtension = extensions ? extensions.includes(extname) : true
+
+      if(childStats.isDirectory()) {
+        await runThrough({
+          folderName: folderPath,
+          extensions
+        })
+      }
   
       if(childStats.isFile() && matchExtension) {
         const pathToFile = path.resolve(folderPath)
@@ -37,17 +44,7 @@ export async function startRun({ initialFolder, extensions }: Omit<RummageFolder
         }
   
         paths = [...paths, file]
-        continue
       }
-      
-      if(childStats.isDirectory()) {
-        await runThrough({
-          folderName: folderPath,
-          extensions
-        })
-      }
-  
-      continue
     }
   }
 
