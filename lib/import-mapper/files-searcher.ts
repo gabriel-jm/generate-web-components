@@ -39,7 +39,7 @@ export async function startRun({ initialFolder, extensions }: Omit<RummageFolder
           )
         }
   
-        if(extname === 'js') {
+        if(extname === 'js' && process.env.NODE_ENV !== 'production') {
           fs.unlink(pathToFile)
         }
   

@@ -64,7 +64,8 @@ function runServer(files: PathMap[]) {
 async function run() {
   const compileResult = await rummageFolder({
     initialFolder: 'src',
-    extensions: ['html', 'jpg', 'css', 'js']
+    extensions: ['html', 'jpg', 'css', 'js'],
+    usingTS: process.env.NODE_ENV !== 'production'
   })
 
   if(compileResult.success) {
