@@ -18,7 +18,13 @@ input {
   border: 1px solid #bbb;
   border-radius: 4px;
   padding: 8px 12px;
+  font-size: 0.9rem;
   outline: 0;
+}
+
+input:disabled {
+  background-color: #ddd8;
+  cursor: no-drop;
 }
 
 .btn {
