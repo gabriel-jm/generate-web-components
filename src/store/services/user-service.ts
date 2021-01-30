@@ -1,6 +1,6 @@
 import { api } from '../api/index.js'
 
-interface User {
+export interface User {
   id: number
   name: string
   username: string
@@ -9,6 +9,10 @@ interface User {
 
 class UserService {
   #path = '/users'
+
+  find(data: number) {
+    return api.get(this.#path, data) || null
+  }
 
   findByUsernameAndPassword(data: Omit<User, 'name' | 'id'>) {
     const all = api.get(this.#path) as User[]
@@ -28,6 +32,14 @@ class UserService {
     ;
 
     return existedUser ? null : api.post(this.#path, data)
+  }
+
+  update(data: User) {
+    const existedUser = this.find(data.id)
+
+    if(!existedUser) return null
+
+    return api.put(this.#path, data)
   }
 
   getCurrentUser() {
