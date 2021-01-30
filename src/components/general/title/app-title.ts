@@ -21,15 +21,15 @@ const Title = <TitleComponent> {
   isLoged: false,
 
   configLogInAndLogOut() {
-    globalConfigs.logOut = () => {
+    globalConfigs.on('logOut', () => {
       userService.logout()
       globalConfigs.currentUser = null
       this.isLoged = false
       this.select('.user-details-container')?.remove()
       router.go('/')
-    }
+    })
 
-    globalConfigs.logIn = () => {
+    globalConfigs.on('logIn', () => {
       if (!globalConfigs.currentUser) return
 
       !this.isLoged && (
@@ -39,9 +39,12 @@ const Title = <TitleComponent> {
       const logoutBtn = this.select('button')
       logoutBtn?.addEventListener('click', () => globalConfigs.logOut())
       this.isLoged = true
-      
-      return true
-    }
+    })
+
+    globalConfigs.on('userChange', () => {
+      const query = '.user-details-container span'
+      this.select(query).innerText = globalConfigs.currentUser?.name || ''
+    })
 
     globalConfigs.logIn()
   },
