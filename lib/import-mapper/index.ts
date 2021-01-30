@@ -26,7 +26,7 @@ export async function rummageFolder(options: RummageFolderOptions) {
   const { initialFolder, extensions, usingTS = true } = options
 
   if(usingTS) {
-    const tsCompiling = require('./ts-compiling')
+    const { tsCompiling } = require('./ts-compiling')
     const procced = await tsCompiling()
 
     if(!procced.compiled) {
