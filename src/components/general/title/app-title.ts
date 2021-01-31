@@ -43,7 +43,8 @@ const Title = <TitleComponent> {
 
     globalConfigs.on('userChange', () => {
       const query = '.user-details-container span'
-      this.select(query).innerText = globalConfigs.currentUser?.name || ''
+      const { currentUser } = globalConfigs
+      this.select(query).innerHTML = currentUser?.name || ''
     })
 
     globalConfigs.logIn()
