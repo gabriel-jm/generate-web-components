@@ -109,6 +109,7 @@ class UserInfoModal extends ComponentClass {
               type="password"
               name="password"
               disabled
+              placeholder="****"
             />
           </label>
         </form>
@@ -136,7 +137,7 @@ generateComponent(UserInfoModal, {
     .user-modal-header {
       color: #333;
       margin: 0 0 20px;
-      border-bottom: 1px solid #777;
+      border-bottom: 1px solid #555;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -158,7 +159,7 @@ generateComponent(UserInfoModal, {
     .user-modal-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 12px;
     }
 
     .user-modal-form span {
@@ -171,8 +172,14 @@ generateComponent(UserInfoModal, {
     }
     
     .user-modal-actions {
-      margin-top: 18px;
+      margin-top: 20px;
       text-align: right;
+      border-top: 1px solid #5554;
+      padding-top: 17px;
+    }
+
+    .user-modal-actions button {
+      width: 80px;
     }
     
     .user-modal-actions button + button {
@@ -187,7 +194,6 @@ generateComponent(UserInfoModal, {
       .user-modal-form {
         grid-template-columns: 1fr;
         justify-items: center;
-        gap: 12px;
       }
     }
   `
