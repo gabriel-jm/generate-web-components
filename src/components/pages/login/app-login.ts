@@ -5,10 +5,6 @@ import { css, html } from '/core/templates/index.js'
 import { globalConfigs }  from '/store/global.js'
 import userService from '/store/services/user-service.js'
 
-function makeLogin() {
-  return globalConfigs.logIn()
-}
-
 function Login(element: Component) {
   const form = element.select('form') as HTMLFormElement
 
@@ -27,16 +23,16 @@ function Login(element: Component) {
     const user = userService.findByUsernameAndPassword(credentials)
 
     if(user) {
-      globalConfigs.currentUser = user
-      userService.setCurrentUser(user)
-      const successLogin = makeLogin()
-      successLogin && router.go('/dashboard')
+      const { password, ...userData } = user
+      userService.setCurrentUser(userData.id)
+      globalConfigs.logIn(userData)
+      router.go('/dashboard')
     }
   })
 
   if(globalConfigs.currentUser) {
-    const successLogin = makeLogin()
-    successLogin && router.go('/dashboard')
+    globalConfigs.logIn()
+    router.go('/dashboard')
   }
 }
 
