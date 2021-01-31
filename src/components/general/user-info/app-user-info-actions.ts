@@ -1,13 +1,12 @@
+import './user-info-modal/index.js'
 import { Modal } from '../../utils/modal/app-modal.js'
 import { ComponentClass } from '/core/component-factory/types.js'
 import { html } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'
 
 export class UserInfo extends ComponentClass {
-  user = globalConfigs.currentUser
-
   init() {
-    const modal = this.select('app-modal') as Modal
+    const modal = this.select('user-info-modal') as Modal
     const userOptionsIcon = this.select('.more')
     const userOptionsMenu = this.select('.user-options')
 
@@ -27,10 +26,6 @@ export class UserInfo extends ComponentClass {
       modal.show()
       userOptionsIcon.dispatchEvent(new Event('focusout'))
     })
-
-    this.select('.close-modal').addEventListener('click', () => {
-      modal.close()
-    })
   }
 
   render() {
@@ -48,17 +43,7 @@ export class UserInfo extends ComponentClass {
         </ul>
       </div>
 
-      <app-modal class="user-modal">
-        <div class="user-modal-header">
-          <h2>User Info</h2>
-          <button class="close-modal">X</button>
-        </div>
-
-        <div class="user-details">
-          <span>Name</span> ${this.user?.name as string}<br/>
-          <span>Username</span> ${this.user?.username as string}
-        </div>
-      </app-modal>
+      <user-info-modal />
     `
   }
 }
