@@ -8,8 +8,24 @@ export interface Modal extends Component {
 }
 
 function Modal(element: Modal) {
+  const container = element.select('div')
+
   element.show = () => element.setAttribute('open', '')
-  element.close = () => element.removeAttribute('open')
+  element.close = () => {
+    container.classList.add('closing')
+    element.classList.add('closing')
+  }
+
+  element.addEventListener('animationend', e => {
+    if(e.animationName === 'fade-out') {
+      element.classList.remove('closing')
+      element.removeAttribute('open')
+    }
+  })
+
+  container.addEventListener('animationend', () => {
+    container.classList.remove('closing')
+  })
 }
 
 generateComponent(Modal, {
@@ -34,6 +50,15 @@ generateComponent(Modal, {
     :host([open]) {
       display: flex;
       justify-content: center;
+      animation: fade 0.3s;
+    }
+
+    :host([open]) div {
+      animation: drop 0.3s;
+    }
+
+    :host(.closing[open]) {
+      animation: fade-out 0.3s;
     }
 
     div {
@@ -45,9 +70,57 @@ generateComponent(Modal, {
       box-shadow: 0 2px 3px #3336;
     }
 
+    :host([open]) div.closing {
+      animation: up 0.3s;
+    }
+
     ::slotted(button) {
       outline: 0;
       cursor: pointer;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade-out {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes drop {
+      from {
+        transform: translateY(-30%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes up {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-30%);
+        opacity: 0;
+      }
     }
   `
 })

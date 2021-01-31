@@ -1,6 +1,7 @@
 import { generateComponent } from '/core/component-factory/index.js'
 import { Component } from '/core/component-factory/types.js'
 import router from '/core/router/index.js'
+import { css } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'
 
 function dashboard(element: Component) {
@@ -21,5 +22,12 @@ function dashboard(element: Component) {
 generateComponent(dashboard, {
   tag: 'app-dashboard',
   cssPaths: ['css/styles.css'],
-  htmlPath: 'components/pages/dashboard/app-dashboard.html'
+  htmlPath: 'components/pages/dashboard/app-dashboard.html',
+  cssString: css`
+    :host {
+      display: block;
+      max-width: 1300px;
+      margin: auto;
+    }
+  `
 })
