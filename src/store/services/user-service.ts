@@ -43,13 +43,13 @@ class UserService {
   }
 
   getCurrentUser() {
-    const user = localStorage.getItem('my-app:current-user')
+    const userId = localStorage.getItem('my-app:current-user')
 
-    return user ? JSON.parse(user) : null
+    return this.find(Number(userId))
   }
 
-  setCurrentUser(data: User) {
-    localStorage.setItem('my-app:current-user', JSON.stringify(data))
+  setCurrentUser(userId: number) {
+    localStorage.setItem('my-app:current-user', userId.toString())
   }
 
   logout() {

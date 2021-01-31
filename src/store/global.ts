@@ -1,13 +1,5 @@
 import { User } from './services/user-service.js'
 
-// interface GlobalConfigs {
-//   [key: string]: any
-//   currentUser: null | Omit<User, 'password'>
-//   logIn(): true | undefined
-//   logOut(): void
-//   on(eventName: string, callback: Function): void
-// }
-
 type Events = {
   logIn: Function[]
   logOut: Function[]
@@ -30,8 +22,8 @@ class GlobalState {
   }
 
   set currentUser(data: null | Omit<User, 'password'>) {
-    events.userChange.forEach(fn => fn())
     this.#user = data
+    events.userChange.forEach(fn => fn())
   }
 
   on(eventName: EventsNames, callback: Function) {
@@ -42,7 +34,11 @@ class GlobalState {
     events[eventName].push(callback)
   }
 
-  logIn() {
+  logIn(user?: Omit<User, 'password'>) {
+    if(user) {
+      this.#user = user
+    }
+
     events.logIn.forEach(fn => fn())
   }
 
