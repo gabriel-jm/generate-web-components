@@ -1,3 +1,5 @@
+import './new-post-modal/index.js'
+import { Modal } from '/components/utils/modal/app-modal.js'
 import { generateComponent } from '/core/component-factory/index.js'
 import { Component } from '/core/component-factory/types.js'
 import router from '/core/router/index.js'
@@ -17,6 +19,10 @@ function dashboard(element: Component) {
   globalConfigs.on('userChange', setWellcomeMessage)
 
   setWellcomeMessage()
+
+  element.select('.btn').addEventListener('click', () => {
+    (element.select('new-post-modal') as Modal).show()
+  })
 }
 
 generateComponent(dashboard, {
