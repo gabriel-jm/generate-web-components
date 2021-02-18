@@ -28,7 +28,7 @@ function runServer(files: PathMap[]) {
 
       const headers = {
         'Content-Type': `${contentType}; charset=utf-8`,
-        'Cache-Control': 'no-cache',
+        'Cache-Control': 's-maxage=36000, must-revalidate, immutable',
         'X-Content-Type-Options': 'nosniff'
       }
       

@@ -52,7 +52,6 @@ generateComponent(Login, {
       </div>
     </form>
   `,
-  cssPaths: ['css/styles.css'],
   cssString: css`
     :host {
       width: max-content;

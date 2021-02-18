@@ -27,7 +27,6 @@ function dashboard(element: Component) {
 
 generateComponent(dashboard, {
   tag: 'app-dashboard',
-  cssPaths: ['css/styles.css'],
   htmlPath: 'components/pages/dashboard/app-dashboard.html',
   cssString: css`
     :host {

@@ -7,8 +7,7 @@ generateComponent(Register, {
   tag: 'app-register',
   htmlPath: 'components/pages/register/app-register.html',
   cssPaths: [
-    'components/pages/register/app-register.css',
-    'css/styles.css'
+    'components/pages/register/app-register.css'
   ]
 })
 

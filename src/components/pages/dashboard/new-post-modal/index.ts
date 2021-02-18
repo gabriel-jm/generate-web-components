@@ -14,7 +14,6 @@ function NewPostModal(element: Component) {
 
 generateComponent(NewPostModal, {
   tag: 'new-post-modal',
-  cssPaths: ['css/styles.css'],
   htmlString: html`
     <app-modal>
       <header>
