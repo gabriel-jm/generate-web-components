@@ -1,7 +1,8 @@
 import { findHtml } from '../html/find-html.js'
-import { findCss, generateStyleTag } from '../styles/find-css.js'
+import { findCss } from '../styles/find-css.js'
 import { generateTemplate } from '../html/generate-template.js'
 import createComponent from './generate-component-class.js'
+import { getCss } from '../styles/css-loader.js'
 
 export interface ComponentConfigs {
   tag: string
@@ -12,6 +13,16 @@ export interface ComponentConfigs {
   watchedAttrs?: string[]
   shadowDOM?: boolean
 }
+
+const sharedCss = (async () => {
+  const allStyles = await Promise.all(
+    ['css/styles.css'].map(path => getCss(path))
+  )
+
+  return allStyles.reduce((acc, css) => {
+    return acc + css
+  }, "")
+})()
 
 export async function generateComponent(
   actionsDefinition: Function | Object | null,
@@ -32,7 +43,10 @@ export async function generateComponent(
   const styles = await (async () => {
     if(!cssPaths && !cssString) return null
 
-    const inline = cssString || ''
+    let inline = await sharedCss
+
+    inline += cssString || ''
+
     const styles = cssPaths
       ? await findCss(cssPaths)
       : document.createElement('style')
