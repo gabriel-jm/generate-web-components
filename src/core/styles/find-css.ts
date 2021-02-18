@@ -1,11 +1,6 @@
 import { getCss } from './css-loader.js'
 
-interface cssRegister {
-  path: string
-  css: string
-}
-
-const cssCache: Array<cssRegister> = []
+const cssCache: { [key: string]: string } = {}
 
 export function generateStyleTag(css: string) {
   const style = document.createElement('style')
@@ -15,9 +10,9 @@ export function generateStyleTag(css: string) {
 }
 
 export async function findCss(paths: string[]) {
-  const allStyles = await Promise.all(
-    paths.map(path => findSingleCss(path))
-  )
+  const allStylesPromises = paths.map(path => findSingleCss(path))
+  
+  const allStyles = await Promise.all(allStylesPromises)
 
   const style = allStyles.reduce((acc, styles) => {
     return acc + (styles || '')
@@ -27,15 +22,12 @@ export async function findCss(paths: string[]) {
 }
 
 export async function findSingleCss(path: string) {
-  const findByPath = (comp: cssRegister) => comp.path === path
-  const existingCss = cssCache.find(findByPath)
-
-  if(existingCss) {
-    return existingCss.css
+  if(path in cssCache) {
+    return cssCache[path]
   }
 
   const css = await getCss(path)
-  cssCache.push({ path, css })
+  cssCache[path] = css
 
   return css
 }
