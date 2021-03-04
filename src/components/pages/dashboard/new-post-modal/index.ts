@@ -2,14 +2,44 @@ import { Modal } from '/components/utils/modal/app-modal.js'
 import { generateComponent } from '/core/component-factory/index.js'
 import { Component } from '/core/component-factory/types.js'
 import { css, html } from '/core/templates/index.js'
+import { globalConfigs } from '/store/global.js'
+import postsService from '/store/services/posts-service.js'
 
 function NewPostModal(element: Component) {
   const modal = element.select('app-modal') as Modal
+  const textArea = element.select('textarea') as HTMLTextAreaElement
+  
   element.show = () => modal.show()
-  element.close = () => modal.close()
+  element.close = () => {
+    textArea.value = ''
+    modal.close()
+  }
 
   element.select('[close-modal]').addEventListener('click', element.close)
   element.select('.btn[close-modal]').addEventListener('click', element.close)
+
+  const doneBtn = element.select('.btn[done]') as HTMLButtonElement
+
+  doneBtn.addEventListener('click', () => {
+    const date = new Date()
+    date.setTime(date.getTime() - (date.getTimezoneOffset() * 60000))
+
+    const content = textArea.value.trim()
+
+    if(!content) throw new Error('Your post can\'t be empty')
+
+    const userPost = {
+      content,
+      userId: globalConfigs.currentUser?.id || 0,
+      publishingDate: date.toISOString()
+    }
+
+    const result = postsService.save(userPost)
+
+    if(result) return element.close()
+
+    console.error('Error on save your post')
+  })
 }
 
 generateComponent(NewPostModal, {
@@ -26,7 +56,7 @@ generateComponent(NewPostModal, {
       </section>
 
       <footer>
-        <button class="btn">Done</button>
+        <button class="btn" done>Done</button>
         <button class="btn" close-modal>Cancel</button>
       </footer>
     </app-modal>
@@ -62,7 +92,7 @@ generateComponent(NewPostModal, {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 5px 20px;
+      padding: 10px 20px;
     }
 
     section textarea {
