@@ -10,6 +10,10 @@ export interface Post {
 class PostsService {
   #path = '/posts'
 
+  findAll() {
+    return api.get(this.#path)
+  }
+
   save(data: Post) {
     const existedUser = userService.find(data.userId)
 
