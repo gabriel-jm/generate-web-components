@@ -1,3 +1,4 @@
+import './post-feed/index.js'
 import './new-post-modal/index.js'
 import { Modal } from '/components/utils/modal/app-modal.js'
 import { generateComponent } from '/core/component-factory/index.js'
