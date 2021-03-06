@@ -30,6 +30,9 @@ export function raw(strings: TemplateStringsArray | string[], ...values: string[
       }
     )
     .replace(/<(slot)(.*?)\/>/g, '<$1$2></$1>')
+    .replace(/\r|\n/g, '')
+    .replace(/>(\s+)</g, '><')
+    .replace(/\s+/g, ' ')
   ;
 
   return new RawHTML(parsedHtml)
