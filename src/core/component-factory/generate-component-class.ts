@@ -138,6 +138,18 @@ export default (
     }
 
     [kInnerHTML]() {
+      if(
+        this.#actions &&
+        typeof this.#actions === 'object' &&
+        this.#actions.render
+      ) {
+        this.root.innerHTML = this.#actions.render()
+        
+        if(styles) {
+          this.root.appendChild(styles)
+        }
+      }
+
       if(template) {
         if(shadowDOM) {
           this.shadowRoot?.appendChild(
@@ -145,21 +157,6 @@ export default (
           )
         } else {
           this.innerHTML = template.innerHTML
-        }
-      }
-
-      if(
-        this.#actions &&
-        typeof this.#actions === 'object' &&
-        this.#actions.render
-      ) {
-        this.root.innerHTML = this.#actions.render()
-
-        if(styles) {
-          this.root.insertBefore(
-            styles,
-            this.root.firstChild
-          )
         }
       }
     }
