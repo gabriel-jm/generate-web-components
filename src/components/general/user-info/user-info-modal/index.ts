@@ -72,7 +72,7 @@ class UserInfoModal extends ComponentClass {
       id,
       name: name.value,
       username: username.value,
-      password: password.value || user.password
+      password: password.value || user?.password
     })
 
     if(!userUpdated) {
