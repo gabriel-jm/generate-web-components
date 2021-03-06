@@ -8,18 +8,20 @@ import { css } from '/core/templates/index.js'
 import { globalConfigs } from '/store/global.js'
 
 function dashboard(element: Component) {
+  const title = element.select('h2')
+
   if(!globalConfigs.currentUser) {
     router.go('/')
   }
 
   function setWellcomeMessage() {
     const { currentUser } = globalConfigs
-    element.select('h2').innerText = `Bem vindo! ${currentUser?.name}`
+    title.innerText = `Bem vindo! ${currentUser?.name}`
   }
+  
+  setWellcomeMessage()
 
   globalConfigs.on('userChange', setWellcomeMessage)
-
-  setWellcomeMessage()
 
   element.select('.btn').addEventListener('click', () => {
     (element.select('new-post-modal') as Modal).show()
