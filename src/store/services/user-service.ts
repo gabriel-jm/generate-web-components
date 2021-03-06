@@ -10,7 +10,7 @@ export interface User {
 class UserService {
   #path = '/users'
 
-  find(data: number) {
+  find(data: number): User | null {
     return api.get(this.#path, data) || null
   }
 
